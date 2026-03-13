@@ -1,0 +1,93 @@
+body{
+  background:#0f172a;
+  font-family:Arial, Helvetica, sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+.container{
+  background:#1e293b;
+  padding:25px;
+  width:400px;
+  border-radius:12px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.3);
+  color:white;
+}
+
+.title{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.inputRow{
+  display:flex;
+  gap:10px;
+}
+
+input[type="text"]{
+  flex:1;
+  padding:10px;
+  border-radius:6px;
+  border:none;
+}
+
+.addBtn{
+  background:#22c55e;
+  border:none;
+  padding:10px 15px;
+  color:white;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.addBtn:hover{
+  background:#16a34a;
+}
+
+.todoItem{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:15px;
+  padding:8px;
+  background:#334155;
+  border-radius:6px;
+}
+
+.deleteBtn{
+  background:#ef4444;
+  border:none;
+  padding:6px 10px;
+  color:white;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+.deleteBtn:hover{
+  background:#dc2626;
+}
+
+.completed{
+  text-decoration:line-through;
+  color:#94a3b8;
+}
+
+body{
+  background:#0c2357;
+  font-family:Arial, Helvetica, sans-serif;
+  font-size:18px;
+}
+
+.todoItem span{
+  font-size:18px;
+}
+
+body{
+  font-size:18px;
+}
+
+button{
+  font-size:16px;
+}
