@@ -1,17 +1,32 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
+import TodoItem from "./TodoItem";
 
 function App() {
 
   const [text, setText] = useState("");
-  const [todos, setTodos] = useState(() => {
-  const saved = localStorage.getItem("todos");
-  return saved ? JSON.parse(saved) : [];
-});
 
-    useEffect(()=>{
-        localStorage.setItem("todos", JSON.stringify(todos))
-    },[todos])
+  const [todos, setTodos] = useState(() => {
+    const saved = localStorage.getItem("todos");
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  const toggleTodo = (id) => {
+    setTodos(
+      todos.map((t) =>
+        t.id === id ? { ...t, completed: !t.completed } : t
+      )
+    );
+  };
+
+  const deleteTodo = (id) => {
+    setTodos(todos.filter((t) => t.id !== id));
+  };
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+
   return (
     <div className="container">
 
@@ -28,53 +43,25 @@ function App() {
         <button
           className="addBtn"
           onClick={() => {
-            if(text.trim()==="") return;
+            if (text.trim() === "") return;
             setTodos([
               ...todos,
               { id: Date.now(), text: text, completed: false }
-            ])
-            setText("")
+            ]);
+            setText("");
           }}
         >
           Add Task
         </button>
       </div>
-      
+
       {todos.map((todo) => (
-        <div className="todoItem" key={todo.id}>
-
-          <span className={todo.completed ? "completed" : ""}>
-            {todo.text}
-          </span>
-
-          <div className="actions">
-
-            <input
-              type="checkbox"
-              checked={todo.completed}
-              onChange={() =>
-                setTodos(
-                  todos.map((t) =>
-                    t.id === todo.id
-                      ? { ...t, completed: !t.completed }
-                      : t
-                  )
-                )
-              }
-            />
-
-            <button
-              className="deleteBtn"
-              onClick={() =>
-                setTodos(todos.filter((t) => t.id !== todo.id))
-              }
-            >
-              Delete
-            </button>
-
-          </div>
-
-        </div>
+        <TodoItem
+          key={todo.id}
+          todo={todo}
+          toggleTodo={toggleTodo}
+          deleteTodo={deleteTodo}
+        />
       ))}
 
     </div>
